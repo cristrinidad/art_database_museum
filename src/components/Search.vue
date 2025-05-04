@@ -3,7 +3,7 @@
         <div class="row justify-content-md-center">
             <div class="col-sm-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="search" placeholder="text" v-model="searchQuery">
+                    <input type="text" class="form-control" id="search" placeholder="text" v-model="searchQuery" @keydown.enter="onEnter">
                     <label for="search">Search...</label>   
                 </div>
             </div>
@@ -92,6 +92,12 @@ export interface SearchQuery {
     dateEnd: number | undefined;
     medium: string | undefined;
 }
+
+const onEnter = (event: Event) => {
+  if (document.activeElement === event.target) {
+    emit('search', getSearchQuery());
+  }
+};
 
 </script>
 

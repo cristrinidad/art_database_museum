@@ -10,7 +10,7 @@
             <Search @search="searchQuery"/>
         </div>
         <div :class="$style.list">
-            <SearchList :objectids="listObjectIds" :searchClicked="searchClicked" @badObjectId="foundBadId"/>
+            <SearchList :objectids="listObjectIds" :searchClicked="searchClicked" :totalInvalidObj="totalInvalidObj" @badObjectId="foundBadId"/>
         </div>
         <div :class="$style.footer">
             <Footer />   
@@ -31,6 +31,7 @@ import { ref } from 'vue';
 const listObjectIds = ref<number[]>([]);
 let totalObj: number = 0;
 let searchClicked: boolean = false;
+let totalInvalidObj: number = 0;
 
 async function searchQuery(query: SearchQuery): Promise<void> {
     console.log('Search initiated for:', query);
@@ -41,6 +42,7 @@ async function searchQuery(query: SearchQuery): Promise<void> {
         dateEnd: query.dateEnd,
         medium: query.medium
     });
+    totalInvalidObj = 0;
     totalObj = objectIds.total;
     searchClicked = true;
     if (objectIds.objectIDs != null) {
@@ -54,6 +56,7 @@ async function searchQuery(query: SearchQuery): Promise<void> {
 
 function foundBadId(id: number) {
     listObjectIds.value = listObjectIds.value.filter(objectId => objectId !== id);
+    totalInvalidObj++;
     console.log(id, listObjectIds.value.length)
 }
 

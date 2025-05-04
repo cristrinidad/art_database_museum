@@ -1,16 +1,20 @@
 <template>
     <div v-if="searchClicked" class="container card mt-5 mb-5">
         <div class="row card-header">
-            <p class="card-text text-center col-sm-10 mt-2">{{ objectids.length }} items found</p>
-            <Pagination :total="objectids.length" :itemsPerPage="itemsPerPage" @click="changePage" class="col-sm-2"/>
+            <p v-if="totalInvalidObj === 0" class="card-text text-center col-sm-10 mt-2">{{ objectids.length }} items found</p>
+            <p v-else class="card-text text-center col-sm-10 mt-2">{{ objectids.length }} items found ({{ totalInvalidObj }} invalid items found)</p>
+            <Pagination :total="objectids.length" :itemsPerPage="itemsPerPage" :selectedPage="currentPageNumber" @click="changePage" class="col-sm-2"/>
         </div>
         <div class="row card-body mt-3">
-            <template v-for="objectid in pageObjectIds" :key="objectid">
+            <template v-if="props.objectids.length == 0">
+                <p>No Items</p>
+            </template>
+            <template v-else v-for="objectid in pageObjectIds" :key="objectid">
                 <ListItem :id ="objectid" @badObjectId="objectId => emit('badObjectId', objectId)" />
             </template>
         </div>
         <div class="row card-footer">
-            <Pagination :total="objectids.length" :itemsPerPage="itemsPerPage" @click="changePage"/>
+            <Pagination :total="objectids.length" :itemsPerPage="itemsPerPage" :selectedPage="currentPageNumber" @click="changePage"/>
         </div>
     </div>
 </template>
@@ -25,6 +29,7 @@ const currentPageNumber = ref(1);
 interface ListProps {
     searchClicked: boolean;
     objectids: number[];
+    totalInvalidObj: number;
 }
 
 const emit = defineEmits<{

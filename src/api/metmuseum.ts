@@ -43,6 +43,13 @@ export async function searchObjectIds(options: {
     if (options.location != null && options.location !== '') {
         searchUrl.searchParams.append("geoLocation", options.location);
     }
+    if (options.dateBegin != undefined && options.dateEnd !== undefined) {
+        searchUrl.searchParams.append("dateBegin", (options.dateBegin).toString());
+        searchUrl.searchParams.append("dateEnd", (options.dateEnd).toString());
+    }
+    if (options.medium != null && options.medium !== '') {
+        searchUrl.searchParams.append("medium", options.medium);
+    }
     searchUrl.searchParams.append("hasImages", "true");
     searchUrl.searchParams.append("q", options.searchText);
     const response = await fetch(searchUrl.href);
