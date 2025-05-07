@@ -10,7 +10,10 @@
             <Search @search="searchQuery"/>
         </div>
         <div :class="$style.list">
-            <SearchList :objectids="listObjectIds" :searchClicked="searchClicked" :totalInvalidObj="totalInvalidObj" @badObjectId="foundBadId"/>
+            <SearchList v-if="!loading" :objectids="listObjectIds" :searchClicked="searchClicked" :totalInvalidObj="totalInvalidObj" @badObjectId="foundBadId"/>
+            <div v-else class="container card spinner-border mt-5 mb-5" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
         <div :class="$style.footer">
             <Footer />   
@@ -32,9 +35,11 @@ const listObjectIds = ref<number[]>([]);
 let totalObj: number = 0;
 let searchClicked: boolean = false;
 let totalInvalidObj: number = 0;
+const loading = ref(false);
 
 async function searchQuery(query: SearchQuery): Promise<void> {
     console.log('Search initiated for:', query);
+    loading.value = true;
     const objectIds = await searchObjectIds({
         searchText : query.search,
         location: query.location,
@@ -50,6 +55,7 @@ async function searchQuery(query: SearchQuery): Promise<void> {
     } else {
         listObjectIds.value = [];
     }
+    loading.value = false;
 
     console.log('Search initiated for:', objectIds);
 }
