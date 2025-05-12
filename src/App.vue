@@ -11,7 +11,7 @@
         </div>
         <div :class="$style.list">
             <SearchList v-if="!loading" :objectids="listObjectIds" :searchClicked="searchClicked" :totalInvalidObj="totalInvalidObj" @badObjectId="foundBadId"/>
-            <div v-else class="container card spinner-border mt-5 mb-5" role="status">
+            <div v-else class="container card spinner-border d-flex justify-content-center align-items-center mt-5 mb-5" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
@@ -78,12 +78,12 @@ function foundBadId(id: number) {
 }
 
 .header {
-    background-color: #4A4947;
+    background-color: #222831;
     
 }
 
 .main {
-    background-color: #FFF7D4;
+    background-color: #DFD0B8;
 }
 
 .search {
@@ -92,6 +92,6 @@ function foundBadId(id: number) {
 }
 
 .footer {
-    background-color: #4A4947;
+    background-color: #222831;
 }
 </style>
