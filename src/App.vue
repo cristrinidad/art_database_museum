@@ -83,7 +83,7 @@ function foundBadId(id: number) {
 }
 
 .main {
-    background-color: #3F7D58;
+    background-color: #FFF7D4;
 }
 
 .search {
