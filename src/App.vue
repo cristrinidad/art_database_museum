@@ -73,12 +73,13 @@ function foundBadId(id: number) {
     min-height: 100vh;
     top: 0px;
     left: 0px;
-    background-color: #EFEFEF;
+    background-color: #F1F0E9;
     overflow-y: auto;
 }
 
 .header {
-    background-color: #EF9651;
+    background-color: #4A4947;
+    
 }
 
 .main {
@@ -91,6 +92,6 @@ function foundBadId(id: number) {
 }
 
 .footer {
-    background-color: #EF9651;
+    background-color: #4A4947;
 }
 </style>

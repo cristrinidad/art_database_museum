@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <h1 class="display-1 text-center">Art Database Museum</h1>
+        <h1 class="display-1 text-center text-white">Art Database Museum</h1>
     </div>
 </template>
 
