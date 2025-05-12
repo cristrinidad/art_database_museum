@@ -32,7 +32,6 @@ import { searchObjectIds } from './api/metmuseum';
 import { ref } from 'vue';
 
 const listObjectIds = ref<number[]>([]);
-let totalObj: number = 0;
 let searchClicked: boolean = false;
 let totalInvalidObj: number = 0;
 const loading = ref(false);
@@ -48,7 +47,6 @@ async function searchQuery(query: SearchQuery): Promise<void> {
         medium: query.medium
     });
     totalInvalidObj = 0;
-    totalObj = objectIds.total;
     searchClicked = true;
     if (objectIds.objectIDs != null) {
         listObjectIds.value = objectIds.objectIDs;
